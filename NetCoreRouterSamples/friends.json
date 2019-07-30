@@ -1,0 +1,19 @@
+{
+  "fiends": [
+    {
+      "name": "Ali",
+      "surname": "Emiroðlu",
+      "job": "Senior Software Developer"
+    },
+    {
+      "name": "Mücahit",
+      "surname": "Kaçmaz",
+      "job": "Java Developer"
+    },
+    {
+      "name": "Ramazan",
+      "surname": "Kaçmaz",
+      "job": "Seo"
+    }
+  ]
+}
