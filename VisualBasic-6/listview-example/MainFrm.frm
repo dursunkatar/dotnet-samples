@@ -3,13 +3,13 @@ Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Begin VB.Form MainFrm 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Listview sample"
-   ClientHeight    =   2010
+   ClientHeight    =   2025
    ClientLeft      =   45
-   ClientTop       =   390
+   ClientTop       =   690
    ClientWidth     =   6810
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
-   ScaleHeight     =   2010
+   ScaleHeight     =   2025
    ScaleWidth      =   6810
    StartUpPosition =   2  'CenterScreen
    Begin VB.CommandButton btnAddItem 
@@ -63,6 +63,12 @@ Begin VB.Form MainFrm
       Appearance      =   1
       NumItems        =   0
    End
+   Begin VB.Menu mBen 
+      Caption         =   "&Ben"
+      Begin VB.Menu mHakkimda 
+         Caption         =   "&Hakkımda"
+      End
+   End
 End
 Attribute VB_Name = "MainFrm"
 Attribute VB_GlobalNameSpace = False
@@ -73,7 +79,7 @@ Attribute VB_Exposed = False
 
 Private Sub btnAddItem_Click()
 
-  With ListView1.ListItems.Add(, , "Ay�e")
+  With ListView1.ListItems.Add(, , "Ayşe")
             .SubItems(1) = "dur"
             .SubItems(2) = "0565"
   End With
@@ -84,13 +90,13 @@ ListView1.ListItems.Remove (1)
 End Sub
 
 Private Sub btnGetItem_Click()
-MsgBox ListView1.ListItems.item(2).Text
-MsgBox ListView1.ListItems.item(2).ListSubItems.item(1)
+MsgBox ListView1.ListItems.Item(2).Text
+MsgBox ListView1.ListItems.Item(2).ListSubItems.Item(1)
 End Sub
 
 Private Sub btnGetSelectedItem_Click()
 MsgBox ListView1.SelectedItem.Text
-MsgBox ListView1.SelectedItem.ListSubItems.item(1).Text
+MsgBox ListView1.SelectedItem.ListSubItems.Item(1).Text
 End Sub
 
 
@@ -118,4 +124,8 @@ With ListView1
         End With
     
 End With
+End Sub
+
+Private Sub mHakkimda_Click()
+MsgBox "o çılgın bir coder", vbInformation, "Dursun Katar"
 End Sub
