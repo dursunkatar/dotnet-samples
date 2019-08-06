@@ -117,12 +117,6 @@ MsgBox ListView1.SelectedItem.Text
 MsgBox ListView1.SelectedItem.ListSubItems.Item(1).Text
 End Sub
 
-
-
-
-
-
-
 Private Sub Form_Load()
 With ListView1
 
@@ -131,8 +125,7 @@ With ListView1
     .ColumnHeaders.Add , , "Ad"
     .ColumnHeaders.Add , , "Soyad"
     .ColumnHeaders.Add , , "Tel"
-    
-    
+        
         With .ListItems.Add(, , "Dursun")
             .SubItems(1) = "Katar"
             .SubItems(2) = "0552"
