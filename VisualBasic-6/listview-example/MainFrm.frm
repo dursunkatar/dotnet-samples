@@ -3,38 +3,46 @@ Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Begin VB.Form MainFrm 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Listview sample"
-   ClientHeight    =   2025
+   ClientHeight    =   2595
    ClientLeft      =   45
    ClientTop       =   690
    ClientWidth     =   6810
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
-   ScaleHeight     =   2025
+   ScaleHeight     =   2595
    ScaleWidth      =   6810
    StartUpPosition =   2  'CenterScreen
+   Begin VB.CommandButton btnCheckboxItems 
+      Caption         =   "Get checkbox item"
+      Height          =   375
+      Left            =   120
+      TabIndex        =   5
+      Top             =   2040
+      Width           =   3135
+   End
    Begin VB.CommandButton btnAddItem 
       Caption         =   "Add Item"
       Height          =   375
-      Left            =   5160
+      Left            =   3480
       TabIndex        =   4
-      Top             =   1560
-      Width           =   1575
+      Top             =   2040
+      Width           =   3135
    End
    Begin VB.CommandButton btnGetSelectedItem 
       Caption         =   "Get Selected Item"
       Height          =   375
-      Left            =   1800
+      Left            =   2160
       TabIndex        =   3
       Top             =   1560
-      Width           =   1575
+      Width           =   2415
    End
    Begin VB.CommandButton btnDeleteItem 
       Caption         =   "Delete Item"
       Height          =   375
-      Left            =   3480
+      Left            =   4800
       TabIndex        =   2
       Top             =   1560
-      Width           =   1575
+      Width           =   1815
    End
    Begin VB.CommandButton btnGetItem 
       Caption         =   "Get Item (Index)"
@@ -42,7 +50,7 @@ Begin VB.Form MainFrm
       Left            =   120
       TabIndex        =   1
       Top             =   1560
-      Width           =   1575
+      Width           =   1935
    End
    Begin MSComctlLib.ListView ListView1 
       Height          =   1335
@@ -54,6 +62,7 @@ Begin VB.Form MainFrm
       _ExtentY        =   2355
       LabelWrap       =   -1  'True
       HideSelection   =   0   'False
+      Checkboxes      =   -1  'True
       FullRowSelect   =   -1  'True
       GridLines       =   -1  'True
       _Version        =   393217
@@ -85,6 +94,15 @@ Private Sub btnAddItem_Click()
   End With
 End Sub
 
+Private Sub btnCheckboxItems_Click()
+  Dim i As Integer
+       For i = 1 To ListView1.ListItems.Count
+            If ListView1.ListItems.Item(i).Checked Then
+                 Debug.Print ListView1.ListItems.Item(i); " seçildi"
+            End If
+        Next i
+End Sub
+
 Private Sub btnDeleteItem_Click()
 ListView1.ListItems.Remove (1)
 End Sub
@@ -98,6 +116,8 @@ Private Sub btnGetSelectedItem_Click()
 MsgBox ListView1.SelectedItem.Text
 MsgBox ListView1.SelectedItem.ListSubItems.Item(1).Text
 End Sub
+
+
 
 
 
