@@ -1,6 +1,6 @@
 Sub Diziler()
 
-	'4 elemanl� bir dizi
+	'4 elemanlý bir dizi
 	Dim Numaralar(3) As Integer
 
 	Numaralar(0) = 10
@@ -60,7 +60,7 @@ Sub hataMesajlari()
 
     'vbCritical, vbQuestion, vbExclamation, vbInformation
     Dim mesaj1 As Integer
-    mesaj1 = MsgBox("Click to Test", vbOKCancel + vbExclamation, "Ba�l�k")
+    mesaj1 = MsgBox("Click to Test", vbOKCancel + vbExclamation, "Baþlýk")
     MsgBox mesaj1
     
 End Sub
@@ -83,3 +83,28 @@ Sub Convert()
 
 End Sub
 
+Sub ExcelWriteRead()
+    On Error GoTo hata
+    Dim MyExcel As Object
+    Set MyExcel = CreateObject("Excel.Application")
+    MyExcel.Visible = True ' Excelin açılıp açılmadığını görmek için true yapabilirsiniz
+    MyExcel.Workbooks.Open ("file.xlsx")
+    
+    
+    MyExcel.Cells(1, 1).Value = "Dursun"
+    'Cells yerine Range özelliğini de kullanabiliriz.
+    MyExcel.range("B1").Value = "Katar"
+    
+    
+    Dim deger As String
+    ' Değer okuma
+    deger = MyExcel.Cells(1, 1).Value
+    MsgBox deger
+    
+    MyExcel.Workbooks(1).Close (True)
+    MyExcel.Application.Quit
+    Set MyExcel = Nothing
+    
+hata:
+    MsgBox "Hata verdi", vbCritical, "Ben"
+End Sub
