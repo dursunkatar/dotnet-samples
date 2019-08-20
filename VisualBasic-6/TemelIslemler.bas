@@ -108,3 +108,10 @@ Sub ExcelWriteRead()
 hata:
     MsgBox "Hata verdi", vbCritical, "Ben"
 End Sub
+		
+Sub CollectionUsage()
+    Dim Liste  As New Collection
+    Liste.Add "value", "key"
+    MsgBox Liste.Item("key")
+    Set Liste = Nothing
+End Sub
