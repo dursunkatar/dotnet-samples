@@ -112,6 +112,12 @@ End Sub
 Sub CollectionUsage()
     Dim Liste  As New Collection
     Liste.Add "value", "key"
-    MsgBox Liste.Item("key")
+    Liste.Add "value2", "key2"
+    
+    'MsgBox Liste.Item("key")
+    
+    For Each Item In Liste
+      MsgBox Item
+    Next
     Set Liste = Nothing
 End Sub
