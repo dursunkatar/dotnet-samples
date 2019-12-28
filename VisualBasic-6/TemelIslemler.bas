@@ -130,3 +130,17 @@ For i = 0 To (frmTarget.Controls.count - 1)
     If TypeOf ctrltarget Is TextBox Then ctrltarget.Text = ""
 Next i
 End Function
+
+Private Sub ERROR_HANDLE()
+	On Error GoTo err
+
+	Dim str As Integer
+	str = ""
+
+	err:
+	If err.Number <> 0 Then
+		MsgBox err.Description
+		Debug.Print "[" & Me.Name & ".ERROR_HANDLE]: " & err.Description
+	End If
+		  
+End Sub
