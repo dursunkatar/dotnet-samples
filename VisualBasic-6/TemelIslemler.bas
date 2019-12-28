@@ -144,3 +144,28 @@ Private Sub ERROR_HANDLE()
 	End If
 		  
 End Sub
+
+Private Sub lvwArama_ItemCheck(ByVal Item As MSComctlLib.ListItem)
+    On Error GoTo Err_Proc
+    Dim i As Long
+    If Item Is Nothing Then Exit Sub
+    If Item.checked Then
+        If PROJECT_NAME <> "NORM" Then
+        For i = 1 To lvwArama.ListItems.count
+            If i <> Item.Index Then lvwArama.ListItems(i).checked = False
+        Next i
+        End If
+        FiyatID = Item.SubItems(7)
+        Kayit_Bul
+    Else
+        updatemode = False
+        cmdKaydet.Caption = "&Kaydet"
+    End If
+Exit_Proc:
+    On Error Resume Next
+    If cnn.State <> adStateClosed Then cnn.Close
+    Exit Sub
+Err_Proc:
+    HataMesaji
+    Resume Exit_Proc
+End Sub
