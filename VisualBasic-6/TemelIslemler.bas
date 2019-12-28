@@ -121,3 +121,12 @@ Sub CollectionUsage()
     Next
     Set Liste = Nothing
 End Sub
+
+Public Function ClearAllTextBoxes(frmTarget As Form)
+Dim i As Long
+Dim ctrltarget
+For i = 0 To (frmTarget.Controls.count - 1)
+    Set ctrltarget = frmTarget.Controls(i)
+    If TypeOf ctrltarget Is TextBox Then ctrltarget.Text = ""
+Next i
+End Function
