@@ -169,3 +169,7 @@ Err_Proc:
     HataMesaji
     Resume Exit_Proc
 End Sub
+						
+ For Each ch In lvw.ColumnHeaders
+        If ch.Tag = colTag Then colIdx = ch.SubItemIndex: Exit For
+ Next
