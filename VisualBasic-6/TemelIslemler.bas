@@ -173,3 +173,35 @@ End Sub
  For Each ch In lvw.ColumnHeaders
         If ch.Tag = colTag Then colIdx = ch.SubItemIndex: Exit For
  Next
+						
+private sub Sil()
+Dim i As Long
+Dim Kosul As String, Tag As String
+Dim li As ListItem
+Kosul = ""
+
+ For i = 1 To lvwHesapPlani.ListItems.count
+    Set li = lvwHesapPlani.ListItems.Item(i)
+    If (li.Checked) Then
+    
+        If (li.Tag <> "") Then
+          Kosul = Kosul & li.Tag & ","
+        End If
+          
+    End If
+ Next i
+ 
+If (Kosul <> "") Then
+
+Kosul = left(Kosul, Len(Kosul) - 1)
+    If cnn.State = 0 Then cnn.Open
+    cnn.Execute ("update GiderDagilimlari set KayitDurumu=2 where ID in (" & Kosul & ");")
+    cnn.Close
+End If
+
+For i = lvwHesapPlani.ListItems.count To 1 Step -1
+  If lvwHesapPlani.ListItems(i).Checked Then
+    lvwHesapPlani.ListItems.Remove lvwHesapPlani.ListItems(i).i
+  End If
+Next i
+End Sub
