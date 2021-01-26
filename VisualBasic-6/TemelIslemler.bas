@@ -225,3 +225,61 @@ Sub recordsetKullanimi()
     rs.Close
     Set rs = Nothing
 End Sub
+							
+Public Function HtmlTableStr(rs As ADODB.Recordset) As String
+Dim i As Long
+Dim query As String
+Dim rsState As Byte
+rsState = rs.state
+If rs.state = 0 Then rs.Open
+
+query = "<!DOCTYPE html> "
+query = query & "<html lang='tr'> "
+query = query & "<head> "
+query = query & "    <meta charset='UTF-8'> "
+query = query & "    <meta name='viewport' content='width=device-width, initial-scale=1.0'> "
+query = query & "    <title>RECORSET İÇERİĞİ</title> "
+query = query & "    <style> "
+query = query & "        body{ "
+query = query & "            background-color: black; "
+query = query & "        } "
+query = query & "        table{ "
+query = query & "            color: white; "
+query = query & "            margin: 0 auto 0 auto; "
+query = query & "            font-size: 18px; "
+query = query & "            border-collapse: collapse; "
+query = query & "        } "
+query = query & "        td,th{ "
+query = query & "            padding: 5px 10px 5px 10px; "
+query = query & "        } "
+query = query & "    </style> "
+query = query & "</head> "
+query = query & "<body> "
+query = query & "    <table border='1'> "
+query = query & "        <thead> "
+query = query & "            <tr> "
+For i = 0 To rs.Fields.Count - 1
+   query = query & "<th><span>" & rs.Fields.Item(i).Name & "</span></th> "
+Next i
+query = query & "            </tr> "
+query = query & "        </thead> "
+query = query & "        <tbody> "
+rs.MoveFirst
+Do Until rs.EOF
+query = query & "<tr> "
+For i = 0 To rs.Fields.Count - 1
+query = query & "<td><span> "
+query = query & rs.Fields(rs.Fields.Item(i).Name)
+query = query & "</span></td> "
+Next i
+query = query & "</tr> "
+rs.MoveNext
+Loop
+
+query = query & "        </tbody> "
+query = query & "    </table> "
+query = query & "</body> "
+query = query & "</html> "
+If rsState = 0 Then rs.Close
+HtmlTableStr = query
+End Function
