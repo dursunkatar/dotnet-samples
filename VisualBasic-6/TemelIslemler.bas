@@ -209,10 +209,19 @@ End Sub
 Sub recordsetKullanimi()
     Dim rs As New ADODB.Recordset
     rs.Fields.Append "BenimAlan", adVarChar, 255, adFldIsNullable
+
     rs.Open
     rs.AddNew
     rs.Fields(0).Value = "aaa"
-    MsgBox rs.Fields(0).Value
+    rs.AddNew
+    rs.Fields(0).Value = "bbb"
+    
+    rs.MoveFirst
+    Do Until rs.EOF
+    Print rs.Fields("BenimAlan")
+        rs.MoveNext
+    Loop
+ 
     rs.Close
     Set rs = Nothing
 End Sub
