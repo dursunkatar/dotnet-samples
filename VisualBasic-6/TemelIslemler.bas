@@ -205,3 +205,14 @@ For i = lvwHesapPlani.ListItems.count To 1 Step -1
   End If
 Next i
 End Sub
+						
+Sub recordsetKullanimi()
+    Dim rs As New ADODB.Recordset
+    rs.Fields.Append "BenimAlan", adVarChar, 255, adFldIsNullable
+    rs.Open
+    rs.AddNew
+    rs.Fields(0).Value = "aaa"
+    MsgBox rs.Fields(0).Value
+    rs.Close
+    Set rs = Nothing
+End Sub
