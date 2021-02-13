@@ -1,0 +1,41 @@
+﻿@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+@model FluentValidationSample.Models.Product
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div asp-validation-summary="All">
+    </div>
+    <br />
+    <form asp-controller="Home" asp-action="Index" method="post">
+        <div>
+            <label asp-for="ProductName"></label>
+            <input type="text" asp-for="ProductName" />
+            <span asp-validation-for="ProductName"></span>
+        </div>
+        <div>
+            <label asp-for="Quantity"></label>
+            <input type="number" asp-for="Quantity" />
+            <span asp-validation-for="Quantity"></span>
+        </div>
+        <div>
+            <label asp-for="Email"></label>
+            <input type="text" asp-for="Email" />
+            <span asp-validation-for="Email"></span>
+        </div>
+        <button type="submit">Tıkla</button>
+    </form>
+
+    <script src="~/jquery/jquery.min.js"></script>
+    <script src="~/jquery-validate/jquery.validate.min.js"></script>
+    <script src="~/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+</body>
+</html>
