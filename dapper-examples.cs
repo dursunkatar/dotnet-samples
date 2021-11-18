@@ -28,9 +28,17 @@
             public string FirstName { get; set; }
             public List<Advert> Adverts { get; set; }
         }
+        public class Advert
+        {
+            public Guid AdvertId { get; set; }
+            public Guid UserId { get; set; }
+            public string AdvertTitle { get; set; }
+            public string AdvertDescription { get; set; }
+            public Member Member { get; set; }
+        }
         static async Task Foo2()
         {
-            using var sqlConnection = new SqlConnection("Server=89.19.22.210,1433\\R2020;Database=Gs.Cms.Sultanpet;User Id=sa;Password=c@rimEy!318");
+            using var sqlConnection = new SqlConnection("");
             var result = await sqlConnection.QueryAsync<Advert, Member, Advert>(@"select 
                 Custom_Advert.Id as AdvertId,
                 Custom_Advert.UserId,
