@@ -16,3 +16,45 @@
 
             }
 }
+
+
+       public class Member
+       {
+            public Member()
+            {
+                Adverts = new();
+            }
+            public Guid UserId { get; set; }
+            public string FirstName { get; set; }
+            public List<Advert> Adverts { get; set; }
+        }
+        static async Task Foo2()
+        {
+            using var sqlConnection = new SqlConnection("Server=89.19.22.210,1433\\R2020;Database=Gs.Cms.Sultanpet;User Id=sa;Password=c@rimEy!318");
+            var result = await sqlConnection.QueryAsync<Advert, Member, Advert>(@"select 
+                Custom_Advert.Id as AdvertId,
+                Custom_Advert.UserId,
+                Custom_Advert.AdvertTitle,
+                Custom_Advert.AdvertDescription,
+                [User].Id as UserId,
+                [User].FirstName
+                from [User]
+                inner join Custom_Advert on [User].Id=Custom_Advert.UserId",
+                    (advert, member) =>
+                    {
+                        advert.Member = member;
+                        return advert;
+                    }, splitOn: "UserId");
+
+
+            List<Member> members = new();
+            var list = result.AsList();
+
+            for (int i = 0; i < list.Count(); i++)
+                if (!members.Any(x => x.UserId == list[i].UserId))
+                    members.Add(list[i].Member);
+
+
+            foreach (var member in members)
+                member.Adverts.AddRange(list.Where(x => x.UserId == member.UserId));
+        }
