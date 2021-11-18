@@ -1,4 +1,4 @@
-alter procedure foo (
+create procedure foo (
 	 @UserId UNIQUEIDENTIFIER
 	,@ResultCode INT OUTPUT
 	,@ReturnMessage NVARCHAR(30) OUTPUT
