@@ -66,3 +66,49 @@
             foreach (var member in members)
                 member.Adverts.AddRange(list.Where(x => x.UserId == member.UserId));
         }
+
+    public class TMember
+    {
+        public TMember()
+        {
+            Languages = new();
+        }
+        public int MemberId { get; set; }
+        public string FirstName { get; set; }
+        public List<Language> Languages { get; set; }
+    }
+
+    public class Language
+    {
+        public int LanguageId { get; set; }
+        public string Text { get; set; }
+    }
+
+   static async Task Foo3()
+        {
+            using var sqlConnection = new SqlConnection("Server=DESKTOP-K2KA54H\\SQLEXPRESS;Database=testdb;Trusted_Connection=True;");
+            List<TMember> members = new();
+            var result = await sqlConnection.QueryAsync<TMember, Language, TMember>(@"select 
+                    Members.MemberId,
+                    Members.FirstName,
+                    Languages.LanguageId  ,
+                    Languages.[Text]
+                    from Members
+                    inner join MemberLanguages on Members.MemberId=MemberLanguages.MemberId
+                    inner join Languages on Languages.LanguageId=MemberLanguages.LanguageId",
+                    (member, language) =>
+                    {
+                        var _member = members.FirstOrDefault(x => x.MemberId == member.MemberId);
+                        if (_member is null)
+                        {
+                            member.Languages.Add(language);
+                            members.Add(member);
+                        }
+                        else
+                        {
+                            _member.Languages.Add(language);
+                        }
+
+                        return member;
+                    }, splitOn: "MemberId,LanguageId");
+        }
