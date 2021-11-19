@@ -41,7 +41,7 @@ namespace MvcIdentityExample.Controllers
             identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, "falan filan"));
             identity.AddClaim(new Claim(ClaimTypes.Name, "dursun"));
             identity.AddClaim(new Claim(ClaimTypes.Role, role));
-            AuthenticationManager.SignIn(identity);
+            AuthenticationManager.SignIn(new AuthenticationProperties {IsPersistent=false }, identity);
 
             return "bi dene baakim";
         }
