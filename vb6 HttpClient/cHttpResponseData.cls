@@ -14,7 +14,7 @@ Attribute VB_Exposed = False
 Public z_jsonStr As String
 Private m_json As Object
 Public Property Get Text() As String
-   toString = z_jsonStr
+   Text = z_jsonStr
 End Property
 Public Property Get Json() As Object
     If m_json Is Nothing Then
